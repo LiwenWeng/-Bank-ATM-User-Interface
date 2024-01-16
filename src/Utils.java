@@ -4,9 +4,11 @@ import java.util.Map;
 public class Utils {
     private Utils() {}
 
-    public static Map<String, String> Colors = new HashMap<>();
     public static String reset = "\u001b[0m";
     public static String bold = "\u001b[1m";
+    public static String underline = "\u001b[4m";
+
+    public static Map<String, String> Colors = new HashMap<>();
     static {
         Colors.put("Red", "\u001b[38;5;196m");
         Colors.put("Green", "\u001b[38;5;46m");
@@ -32,15 +34,19 @@ public class Utils {
         return Colors.get(color) + Utils.bold + text + reset;
     }
 
+    public static String bold(String text) {
+        return bold + text + reset;
+    }
+
+    public static String underline(String text) {
+        return underline + text + reset;
+    }
+
     public static void clearLine() {
         System.out.print("\u001b[1A\u001b[2K");
     }
 
     public static void clearScreen() {
         System.out.print("\u001b[2J\u001b[1000A");
-    }
-
-    public static String bold(String text) {
-        return bold + text + reset;
     }
 }
