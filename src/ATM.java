@@ -2,6 +2,8 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class ATM {
+    private ATM() {}
+
     private static Scanner scanner = new Scanner(System.in);
     private static Customer customer;
 
@@ -68,18 +70,25 @@ public class ATM {
     }
 
     private static void menu() {
-        printMenuScreen();
+        String menuScreen = getMenuScreen();
+
+        String input = scanner.nextLine();
+        while (!input.equals("-1")) {
+            Button.boldButton(input, menuScreen);
+            input = scanner.nextLine();
+        }
     }
 
-    private static void printMenuScreen() {
+    private static String getMenuScreen() {
+        Utils.clearScreen();
+
         Date date = new Date();
 
-
-        System.out.printf("""
+        return String.format("""
                  ----------------------------------------------------------------------------
                 |   █████╗ ████████╗███╗   ███╗                                              |
-                |  ██╔══██╗╚══██╔══╝████╗ ████║                         %1$s
-                |  ███████║   ██║   ██╔████╔██║                         %2$tm/%2$td/%2$ty | %2$tH:%2$tM%2$tp   |
+                |  ██╔══██╗╚══██╔══╝████╗ ████║                                              |
+                |  ███████║   ██║   ██╔████╔██║                                              |
                 |  ██╔══██║   ██║   ██║╚██╔╝██║                                              |
                 |  ██║  ██║   ██║   ██║ ╚═╝ ██║                                              |
                 |  ╚═╝  ╚═╝   ╚═╝   ╚═╝     ╚═╝                                              |
@@ -102,23 +111,23 @@ public class ATM {
                 |   |   Check transaction history |       | Change your account pin      |   |
                 |    -----------------------------         ------------------------------    |
                 |                                                                            |
-                |  %4$s                                                           |
+                |  %4$s                                                                      |
                 |                                                                            |
                  ----------------------------------------------------------------------------
-             """,
+                 """,
 
-                Utils.bold("Welcome " + formatName(customer.getName())),
+                Utils.bold("Welcome " + formatName(customer.getName())) + "|",
                 date,
                 Utils.bold("CHOOSE ONE OPTION TO CONTINUE"),
-                Utils.color("LOGOUT AND EXIT", "Red", true)
-                );
+                Utils.color("EXIT", "Red", true)
+        );
     }
 
     private static String formatName(String name) {
         if (name.length() > 11) {
             return name.substring(0, 8) + "...! |";
         } else {
-            return name + "!" + " ".repeat(12 - name.length()) + "|";
+            return name + "!" + " ".repeat(12 - name.length());
         }
     }
 }

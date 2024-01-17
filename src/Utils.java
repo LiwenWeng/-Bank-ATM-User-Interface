@@ -4,7 +4,7 @@ import java.util.Map;
 public class Utils {
     private Utils() {}
 
-    public static String reset = "\u001b[0m";
+    public static String reset = "\033[0m";
     public static String bold = "\u001b[1m";
     public static String underline = "\u001b[4m";
 
