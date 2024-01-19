@@ -6,6 +6,7 @@ public class ATM {
 
     private static Scanner scanner = new Scanner(System.in);
     private static Customer customer;
+    private static String[][] menuScreen;
 
     public static void start() {
         welcome();
@@ -67,22 +68,26 @@ public class ATM {
     }
 
     private static void menu() {
+        setMenuScreen();
+        printMenuScreen();
         String input = scanner.nextLine();
         while (!input.equals("-1")) {
-            String[][] menuScreen = getMenuScreen();
-            printMenuScreen(menuScreen);
+            setMenuScreen();
+            menuScreen = Button.boldButton(input, menuScreen);
+            printMenuScreen();
             input = scanner.nextLine();
         }
     }
 
-    private static String[][] getMenuScreen() {
+    private static void setMenuScreen() {
         Utils.clearScreen();
 
         Date date = new Date();
-        String menuScreen = String.format("""
-                 ---------------------------------------------------------------------------- 
+        String menuScreenFormat = String.format(
+                 """
+                ------------------------------------------------------------------------------
                 |   █████╗ ████████╗███╗   ███╗                         %1$s
-                |  ██╔══██╗╚══██╔══╝████╗ ████║                                              |
+                |  ██╔══██╗╚══██╔══╝████╗ ████║                         %2$tm/%2$td/%2$ty | %2$tH:%2$tM     |
                 |  ███████║   ██║   ██╔████╔██║                                              |
                 |  ██╔══██║   ██║   ██║╚██╔╝██║                                              |
                 |  ██║  ██║   ██║   ██║ ╚═╝ ██║                                              |
@@ -108,7 +113,7 @@ public class ATM {
                 |                                                                            |
                 |  %4$s                                                                      |
                 |                                                                            |
-                 ---------------------------------------------------------------------------- 
+                ------------------------------------------------------------------------------
                  """,
 
                 Utils.bold("Welcome " + formatName(customer.getName())) + "|",
@@ -117,20 +122,21 @@ public class ATM {
                 Utils.color("EXIT", "Red", true)
         );
 
-        String[][] menuScreenArr = new String[29][78];
+        String[][] menuScreenArr = new String[30][79];
         int index = 0;
         for (int j = 0; j < menuScreenArr.length; j++) {
             for (int i = 0; i < menuScreenArr[j].length; i++) {
-                menuScreenArr[j][i] = menuScreen.substring(index, index+1);
+                menuScreenArr[j][i] = index > 2324 ? " " : menuScreenFormat.substring(index, index+1);
                 index++;
             }
         }
 
-        return menuScreenArr;
+        menuScreen = menuScreenArr;
     }
 
-    private static void printMenuScreen(String[][] menuScreen) {
+    private static void printMenuScreen() {
         for (int j = 0; j < menuScreen.length; j++) {
+            System.out.print(j + ": ");
             for (int i = 0; i < menuScreen[j].length; i++) {
                 System.out.print(menuScreen[j][i]);
             }
