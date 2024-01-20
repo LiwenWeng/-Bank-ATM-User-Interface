@@ -54,7 +54,9 @@ public class ATM {
     private static void login() {
         Utils.clearScreen();
 
-        System.out.print("Enter your pin: ");
+        System.out.println(Utils.bold("LOGIN"));
+
+        System.out.print("\nEnter your pin: ");
         int pin = scanner.nextInt();
         scanner.nextLine();
 
@@ -73,7 +75,7 @@ public class ATM {
         String input = scanner.nextLine();
         while (!input.equals("-1")) {
             setMenuScreen();
-            menuScreen = Button.boldButton(input, menuScreen);
+            menuScreen = Button.selectButton(input, menuScreen);
             printMenuScreen();
             input = scanner.nextLine();
         }
