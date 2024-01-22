@@ -3,12 +3,14 @@ public class Customer {
     private int pin;
     private Account savingsAccount;
     private Account checkingAccount;
+    private TransactionHistory transactionHistory;
 
     public Customer(String name, int pin) {
         this.name = name;
         this.pin = pin;
-        this.savingsAccount = new Account();
-        this.checkingAccount = new Account();
+        savingsAccount = new Account("Savings");
+        checkingAccount = new Account("Checking");
+        transactionHistory = new TransactionHistory();
     }
 
     public String getName() {
@@ -27,8 +29,8 @@ public class Customer {
         return checkingAccount;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public TransactionHistory getTransactionHistory() {
+        return transactionHistory;
     }
 
     public void setPin(int pin) {

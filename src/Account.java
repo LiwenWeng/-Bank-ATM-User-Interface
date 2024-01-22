@@ -1,15 +1,21 @@
 public class Account {
-    private int balance;
+    private double balance;
+    private String name;
 
-    public Account() {
+    public Account(String name) {
         balance = 0;
+        this.name = name;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int newBalance) {
+    public String getName() {
+        return name;
+    }
+
+    public void setBalance(double newBalance) {
         balance = newBalance;
     }
 }
