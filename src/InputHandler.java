@@ -115,7 +115,7 @@ public class InputHandler {
             customer.getTransactionHistory().updateAccountTransactions(
                     "Transferring money from " + fromAcc.getName() + " to " + toAcc.getName(),
                     Utils.color(fromAcc.getName() + " account balance was 0", "Red"),
-                    fromAcc.getName() + " account balance: " + fromAcc.getBalance() + "\n" + toAcc.getName() + " account balance: " + toAcc.getBalance());
+                    fromAcc.getName() + " account balance: " + fromAcc.getBalance() + "\n  " + toAcc.getName() + " account balance: " + toAcc.getBalance());
             scanner.nextLine();
             return;
         }
@@ -130,7 +130,7 @@ public class InputHandler {
             customer.getTransactionHistory().updateAccountTransactions(
                     "Transferring " + amount + " from " + fromAcc.getName() + " to " + toAcc.getName(),
                     Utils.color(fromAcc.getName() + " account balance was not enough", "Red"),
-                    fromAcc.getName() + " account balance: " + fromAcc.getBalance() + "\n" + toAcc.getName() + " account balance: " + toAcc.getBalance());
+                    fromAcc.getName() + " account balance: " + fromAcc.getBalance() + "\n  " + toAcc.getName() + " account balance: " + toAcc.getBalance());
             scanner.nextLine();
             Utils.clearLine();
             System.out.print("Enter the amount to transfer: $");
@@ -145,7 +145,7 @@ public class InputHandler {
         customer.getTransactionHistory().updateAccountTransactions(
                 "Transferring " + amount + " from " + fromAcc.getName() + " to " + toAcc.getName(),
                 Utils.color("Transfer was successful", "Green"),
-                fromAcc.getName() + " account balance: " + fromAcc.getBalance() + "\n" + toAcc.getName() + " account balance: " + toAcc.getBalance());
+                fromAcc.getName() + " account balance: " + fromAcc.getBalance() + "\n  " + toAcc.getName() + " account balance: " + toAcc.getBalance());
         scanner.nextLine();
     }
 
